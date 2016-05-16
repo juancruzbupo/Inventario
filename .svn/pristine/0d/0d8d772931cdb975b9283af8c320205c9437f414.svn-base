@@ -1,0 +1,22 @@
+{
+  "name": "laraviet/l5scaffold",
+  "description": "Extend Laravel 5's generators scaffold.",
+  "keywords": ["laravel", "generators", "scaffold" , "laravel5"],
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "trthanhbk",
+      "email": "thanhcttsp@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Laraviet\\L5scaffold\\": "src/"
+    }
+  }
+}

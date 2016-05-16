@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Transferencia;
+use Illuminate\Http\Request;
+
+class TransferenciaController extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		$transferencias = Transferencia::latest()->get();
+		return view('transferencia.index', compact('transferencias'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+		return view('transferencia.create');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store(Request $request) {
+		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
+		Transferencia::create($request->all());
+		return redirect('transferencia');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id) {
+		$transferencium = Transferencia::findOrFail($id);
+		return view('transferencia.show', compact('transferencium'));
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id) {
+		$transferencium = Transferencia::findOrFail($id);
+		return view('transferencia.edit', compact('transferencium'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id, Request $request) {
+		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
+		$transferencium = Transferencia::findOrFail($id);
+		$transferencium->update($request->all());
+		return redirect('transferencia');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id) {
+		Transferencia::destroy($id);
+		return redirect('transferencia');
+	}
+
+}

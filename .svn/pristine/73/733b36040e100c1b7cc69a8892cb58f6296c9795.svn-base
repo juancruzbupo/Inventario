@@ -1,0 +1,23 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Marcas <a href="<?php echo e(url('/marca/create')); ?>" class="btn btn-primary pull-right btn-sm">Crear Marca</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>SL.</th><th>Nombre</th><th>Accion</th>
+            </tr>
+            <?php /* */$x=0;/* */ ?>
+            <?php foreach($marcas as $item): ?>
+                <?php /* */$x++;/* */ ?>
+                <tr>
+                    <td><?php echo e($x); ?></td>
+                    <td><a href="<?php echo e(url('/marca', $item->id)); ?>"><?php echo e($item->nombre); ?></a></td>
+                    <td><a href="<?php echo e(url('/marca/'.$item->id.'/edit')); ?>"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a> / <?php echo Form::open(['method'=>'delete','action'=>['MarcaController@destroy',$item->id], 'style' => 'display:inline']); ?><button type="submit" class="btn btn-danger btn-xs">Borrar</button><?php echo Form::close(); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

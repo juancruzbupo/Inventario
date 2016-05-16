@@ -1,0 +1,209 @@
+@extends('layouts.master')
+
+@section('content')
+
+  <h1>Crear nueva Carga <a href="{{ url('/carga') }}" class="btn btn-primary pull-right btn-sm">Ver Carga</a></h1>
+  <hr/>
+
+  {!! Form::open(['url' => 'carga', 'class' => 'form-horizontal']) !!}
+
+  <div class="form-group">
+    {!! Form::label('fecha', 'Fecha: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">{!! Form::date('fecha', null, ['class' => 'form-control']) !!}</div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('tipo_comp', 'Tipo Comp: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">{!! Form::select('tipo_comp',['0'=>'Seleccionar...','factura'=>'Factura','remito'=>'Remito'], null, ['class' => 'form-control']) !!}</div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('nro', 'Nro: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">{!! Form::text('nro', null, ['class' => 'form-control']) !!}</div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('proveedor', 'Proveedor: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">{!! Form::select('proveedor',$proveedor, null, ['class' => 'form-control']) !!}</div>
+  </div>
+  <div class="form-group">
+      {!! Form::label('cod_p9', 'Cod P9: ', ['class' => 'col-sm-3 control-label']) !!}
+      <div class="col-sm-6">
+          {!! Form::text('cod_p9', null, ['class' => 'form-control']) !!}
+      </div>
+  </div>
+
+
+  <br><br>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Agregar
+  </button>
+
+  <!-- TABLA PARA AGREGAR PRODUCTO-->
+  <table class="table" id="tabla_carga">
+    <thead>
+      <th>Sub Cuenta</th>
+      <th>Nombre</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Nro Serie</th>
+      <th>Nro Patrimonio</th>
+      <th>Detalle</th>
+      <th>Cantidad</th>
+      <th>Importe</th>
+      <th></th>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <br><br>
+  <div class="form-group">
+    <div class="col-sm-3">
+      {!! Form::submit('Guardar', ['class' => 'btn btn-primary form-control']) !!}
+    </div>
+  </div>
+
+  {!! Form::close() !!}
+
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Producto</h4>
+      </div>
+       {!! Form::open(['url' => 'carga', 'class' => 'form-horizontal', 'id'=>'form-agregar']) !!}
+      <div class="modal-body">
+          <div class="form-group">
+              {!! Form::label('sub_cuenta','Sub Cuenta: ', ['class' => 'col-sm-3 control-label']) !!}
+              <div class="col-sm-6">{!! Form::select('sub_cuenta',$subcuenta, null, ['class' => 'form-control']) !!}  </div>
+          </div>
+          <div class="form-group">
+              {!! Form::label('nombre','Nombre: ', ['class' => 'col-sm-3 control-label']) !!}
+              <div class="col-sm-6">{!! Form::text('nombre', null, ['class' => 'form-control']) !!}</div>
+          </div>
+          <div class="form-group">
+              {!! Form::label('marca','Marca: ', ['class' => 'col-sm-3 control-label']) !!}
+              <div class="col-sm-6">{!! Form::select('marca',$marca, null, ['class' => 'form-control']) !!}  </div>
+          </div>
+          <div class="form-group">
+              {!! Form::label('modelo','Modelo: ', ['class' => 'col-sm-3 control-label']) !!}
+              <div class="col-sm-6">{!! Form::select('modelo',$modelo, null, ['class' => 'form-control']) !!}  </div>
+          </div>
+          <div class="form-group">
+            {!! Form::label('nro_serie', 'Nro Serie: ', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">{!! Form::text('nro_serie', null, ['class' => 'form-control']) !!}</div>
+          </div>
+          <div class="form-group">
+            {!! Form::label('detalle', 'Detalle: ', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">{!! Form::text('detalle', null, ['class' => 'form-control']) !!}</div>
+          </div>
+          <div class="form-group">
+            {!! Form::label('cantidad', 'Cantidad: ', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">{!! Form::text('cantidad', null, ['class' => 'form-control']) !!}</div>
+          </div>
+          <div class="form-group">
+            {!! Form::label('importe', 'Importe: ', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">{!! Form::text('importe', null, ['class' => 'form-control']) !!}</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btn_agregar">Agregar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{!! Form::close() !!}
+
+    @if ($errors->any())
+        <ul class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+
+
+@endsection
+
+
+@section('script')
+
+<script>
+
+  function borrarfila(i){
+    $("#del-"+i).remove();
+  }
+
+  $(function() {
+
+      $('#btn_agregar').click(function () {
+
+        /*** VALIDACIONES ***/
+
+        if ($("#sub_cuenta").val() == 0){
+          alert("Debe seleccionar una sub cuenta");
+          return;
+        }
+
+        if ($("#nombre").val() == ""){
+          alert("Debe ingresar un nombre");
+          return;
+        }
+
+        if ($("#marca").val() == 0){
+          alert("Debe seleccionar una marca");
+          return;
+        }
+
+        if ($("#modelo").val() == 0){
+          alert("Debe seleccionar una sub modelo");
+          return;
+        }
+
+        if ($("#cantidad").val() == ""){
+          alert("Debe ingresar cantidad");
+          return;
+        }
+
+        if ($("#importe").val() == ""){
+          alert("Debe ingresar un importe");
+          return;
+        }
+
+        /*** Armo la tabla***/
+        var cant = $("#cantidad").val();
+
+        var i;
+        for (i = 1; i <= cant; i++) {
+          html=
+          "<tr id='del-" + $("#sub_cuenta").val() + i + "'>"+
+            "<td><input name='subcuenta[]' value= '"+ $("#sub_cuenta").val() + "' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='nombre[]' value= '"+ $("#nombre").val()     + "' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='marca[]' value= '"+ $("#marca").val()     +  "' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='modelo[]' value= '"+ $("#modelo").val()     +"' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='nro_serie[]' value= '"+ $("#nro_serie").val()  +"' class='form-control'></td>"+
+            "<td><input name='nro_patrimonio[]' value='' class='form-control'></td>"+
+            "<td><input name='detalle[]' value= '"+ $("#detalle").val()    +"' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='cantidad[]' value= '"+ 1    +"' readOnly='readOnly' class='form-control'></td>"+
+            "<td><input name='importe[]' value= '"+ $("#importe").val()    +"' readOnly='readOnly' class='form-control'></td>"+
+            "<td><a id='btn_borrar_cuenta' onClick='borrarfila(" + $("#sub_cuenta").val() + i + ");' class='btn btn-default glyphicon glyphicon-trash'></a></td>"+
+          "</tr>";
+          $("#tabla_carga").append(html);
+        }
+        $('#myModal').modal('hide');
+      });
+
+  });
+</script>
+
+@endsection
+
+
+

@@ -1,0 +1,104 @@
+<?php $__env->startSection('content'); ?>
+
+<h1>Consulta Stock</h1>
+<hr/>
+
+<div class="row" style="margin-bottom: 5%;">
+
+	<?php echo Form::open(['url' => 'subcuenta', 'class' => 'form-horizontal']); ?>
+
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">Seleccionar SubCuenta</button>
+			</span>
+
+			<?php echo Form::select('cuenta_codigo',$subcuenta, null, array('class'=>'form-control')); ?>
+
+
+		</div>
+	</div><!-- /.col-lg-6 -->
+	<?php echo Form::close(); ?>
+
+
+</div><!-- /.row -->
+
+<table id="example" class="table table-condensed table-bordered table-striped">
+  <thead>
+      <tr>
+    		<th>Cuenta</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>P9</th>
+        <th>Nro Serie</th>
+        <th>Nro Patrimonio</th>
+        <th>Fecha Alta</th>
+        <th>Fecha Baja</th>
+      </tr>
+  </thead>
+  <tfoot>
+      <tr>
+        <th>Cuenta</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>P9</th>
+        <th>Nro Serie</th>
+        <th>Nro Patrimonio</th>
+        <th>Fecha Alta</th>
+        <th>Fecha Baja</th>
+      </tr>
+  </tfoot>
+</table>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+	<script>
+
+	$(document).ready(function() {
+	    $('#example').DataTable({
+	    	processing: true,
+        serverSide: true,
+        language: {
+			        processing:     "Proceso en curso...",
+			        search:         "Buscar&nbsp;:",
+			        lengthMenu:    "Paginacion&nbsp _MENU_",
+			        info:           "",
+			        infoEmpty:      "",
+			        paginate: {
+			            first:      "",
+			            previous:   "Anterior",
+			            next:       "Siguiente",
+			            last:       ""
+			        }
+			    },
+        ajax: '<?php echo action("GeneralController@datatables"); ?>',
+        columns: [
+            { data: 'subcuenta_id', name: 'subcuenta_id'},
+            { data: 'marca_id', name: 'marca_id'},
+            { data: 'modelo_id', name: 'modelo_id'},
+            { data: 'cod_p9', name: 'cod_p9'},
+            { data: 'nro_serie', name: 'nro_serie'},
+            { data: 'id_patrimonial', name: 'id_patrimonial'},
+            { data: 'fecha_alta', name: 'fecha_alta'},
+            { data: 'fecha_baja', name: 'fecha_baja'}
+        ],
+        initComplete: function () {
+            this.api().columns().every(function () {
+                var column = this;
+                var input = document.createElement("input");
+                $(input).appendTo($(column.footer()).empty())
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                    column.search(val ? val : '', true, false).draw();
+                });
+            });
+        }
+      });
+	});
+
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

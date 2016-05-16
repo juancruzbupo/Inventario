@@ -1,0 +1,85 @@
+<html>
+<body>
+<p><strong>CONTADURÍA GENERAL</strong><br />
+  <label>Dpto. Patrimonial y Valores</label>
+</p>
+<p align="right"><strong>Nº: {{ $data->cod_p9 }}</strong></p>
+<p align="right">SEÑOR JEFE DE: <strong> DEPARTAMENTO CONTROL PATRIMONIAL </strong></p>
+<p align="right"> De acuerdo a las instrucciones impartidas se detallan a continuación  las adjudicaciones etc. que acrecientan el patrimonio de esta Dependencia</p><br />
+<br />
+<br />
+<table align="right">
+	<tr>
+    	<td>........................................................</td>
+	</tr>
+    <tr>
+    	<td align="center">F I R M A</td>
+    </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table width="100%" border="1">
+   <tr>
+    <th>Nº Comprobante</th>
+    <th>Nº Ident.</th>
+    <th>Cant</th>
+    <th>Designación</th>
+    <th>Cta</th>
+    <th>S.Cta</th>
+    <th>Caracteristica</th>
+    <th>Precio Un.</th>
+    <th>Valor</th>
+  </tr>
+  @foreach($data->producto as $item)
+    @if($item->subcuenta->cuenta_codigo < 5000)
+      <tr>
+      <td>{{ $data->nro }}</td>
+      <td> {{ $item->id_patrimonial }}</td>
+      <td> 1 </td>
+      <td> {{ $item->nombre }}</td>
+      <td> {{ $item->subcuenta->cuenta_codigo }}</td>
+      <td> {{ $item->subcuenta_id }}</td>
+      <td> {{ $item->detalle }}</td>
+      <td> {{ $item->importe }}</td>
+      <td>S</td>
+      </tr>
+    @endif
+    @endforeach
+</table>
+<p>&nbsp;</p>
+<table  border="0">
+  <tr>
+    <td>ADQUIERIDO DE:</td>
+    <td> <strong>{{ $data->proveedor->nombre }}</strong></td>
+  </tr>
+  <tr>
+    <td>INGRESADO:</td>
+    <td><strong>{{ date('d/m/Y', strtotime($data->fecha)) }}</strong></td>
+  </tr>
+  <tr>
+    <td>DESTINO:</td>
+    <td><strong> ALMACEN INFORMATICA </strong></td>
+  </tr>
+</table><br/>
+<p>Rendición de cuentas del mes de...........................del año............
+</p>
+<table  border="0" align="right">
+  <tr>
+    <td>MINISTERIO:</td>
+    <td>M.G.J.E.O y SP</td>
+  </tr>
+  <tr>
+    <td>REPARTICION:</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>OFICINA:</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>LUGAR Y FECHA:</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?php $__env->startSection('content'); ?>
+
+<div>
+	<img src="<?php echo e(asset('public/assets/img/logo/LOGO DPV - PNG.png')); ?>">
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

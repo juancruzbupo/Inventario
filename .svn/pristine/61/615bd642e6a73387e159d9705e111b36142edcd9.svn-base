@@ -1,0 +1,17 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Transferencia</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>ID.</th> <th>Fecha</th><th>Agente Id</th><th>Dependencia Id</th>
+            </tr>
+            <tr>
+                <td>{{ $transferencium->id }}</td> <td> {{ $transferencium->fecha }} </td><td> {{ $transferencium->agente_id }} </td><td> {{ $transferencium->dependencia_id }} </td>
+            </tr>
+        </table>
+    </div>
+
+@endsection

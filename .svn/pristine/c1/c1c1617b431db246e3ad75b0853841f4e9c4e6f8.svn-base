@@ -1,0 +1,23 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Agentes <a href="<?php echo e(url('/agente/create')); ?>" class="btn btn-primary pull-right btn-sm">Crear Agente</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>SL.</th><th>Apellido</th><th>Nombre</th><th>Dni</th><th>Accion</th>
+            </tr>
+            <?php /* */$x=0;/* */ ?>
+            <?php foreach($agentes as $item): ?>
+                <?php /* */$x++;/* */ ?>
+                <tr>
+                    <td><?php echo e($x); ?></td>
+                    <td><a href="<?php echo e(url('/agente', $item->id)); ?>"><?php echo e($item->apellido); ?></a></td><td><?php echo e($item->nombre); ?></td><td><?php echo e($item->dni); ?></td>
+                    <td><a href="<?php echo e(url('/agente/'.$item->id.'/edit')); ?>"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a> / <?php echo Form::open(['method'=>'delete','action'=>['AgenteController@destroy',$item->id], 'style' => 'display:inline']); ?><button type="submit" class="btn btn-danger btn-xs">Borrar</button><?php echo Form::close(); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

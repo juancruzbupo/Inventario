@@ -1,0 +1,37 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Editar Carga <a href="<?php echo e(url('/carga')); ?>" class="btn btn-primary pull-right btn-sm">Volver</a></h1>
+    <hr/>
+
+    <?php echo Form::model($carga, ['method' => 'PATCH', 'action' => ['CargaController@update', $carga->id], 'class' => 'form-horizontal']); ?>
+
+
+    <div class="form-group">
+                        <div class="form-group">
+                        <?php echo Form::label('cod_p9', 'Cod P9: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('cod_p9', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <?php echo Form::submit('Editar', ['class' => 'btn btn-primary form-control']); ?>
+
+        </div>
+    </div>
+    <?php echo Form::close(); ?>
+
+
+    <?php if($errors->any()): ?>
+        <ul class="alert alert-danger">
+            <?php foreach($errors->all() as $error): ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

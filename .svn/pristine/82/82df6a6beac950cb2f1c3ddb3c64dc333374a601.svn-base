@@ -1,0 +1,23 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Cargas <a href="<?php echo e(url('/carga/create')); ?>" class="btn btn-primary pull-right btn-sm">Crear Carga</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>Fecha Carga</th><th>Tipo Comp</th><th>Nro</th><th>Cod P9</th><th>Importe</th><th>Accion</th>
+            </tr>
+            <?php /* */$x=0;/* */ ?>
+            <?php foreach($cargas as $item): ?>
+                <?php /* */$x++;/* */ ?>
+                <tr>
+                    <td><a href="<?php echo e(url('/carga', $item->id)); ?>"><?php echo e(date('d/m/Y', strtotime($item->fecha))); ?></a></td>
+                    <td><?php echo e($item->tipo_comp); ?></td><td><?php echo e($item->nro); ?></td><td><?php echo e($item->cod_p9); ?></td><td><?php echo e($item->importe); ?></td>
+                    <td><a href="<?php echo e(url('/carga/'.$item->id.'/edit')); ?>"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a> / <?php echo Form::open(['method'=>'delete','action'=>['CargaController@destroy',$item->id], 'style' => 'display:inline']); ?><button type="submit" class="btn btn-danger btn-xs">Borrar</button><?php echo Form::close(); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

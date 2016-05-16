@@ -1,0 +1,62 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Editar Carga</h1>
+    <hr/>
+
+    {!! Form::model($carga, ['method' => 'PATCH', 'action' => ['CargaController@update', $carga->id], 'class' => 'form-horizontal']) !!}
+
+    <div class="form-group">
+                        {!! Form::label('tipo_comp', 'Tipo Comp: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('tipo_comp', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('nro', 'Nro: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('nro', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('importe', 'Importe: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('importe', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('cantidad', 'Cantidad: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('cantidad', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('producto_id', 'Producto Id: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('producto_id', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('proveedor', 'Proveedor: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('proveedor', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('fecha', 'Fecha: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('fecha', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+    @if ($errors->any())
+        <ul class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+@endsection

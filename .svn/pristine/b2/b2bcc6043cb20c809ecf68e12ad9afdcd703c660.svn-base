@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Transferencia extends Model {
+
+	protected $table = 'transferencias';
+	public $timestamps = true;
+	protected $fillable = array('fecha', 'agente_id', 'dependencia_id');
+	protected $visible = array('fecha', 'agente_id', 'dependencia_id');
+
+	public function agente() {
+		return $this->belongsTo('App\Agente', 'agente_id');
+	}
+
+	public function dependencia() {
+		return $this->belongsTo('App\Dependencia', 'dependencia_id');
+	}
+
+	public function producto() {
+		return $this->hasMany('App\Cuenta');
+	}
+
+}

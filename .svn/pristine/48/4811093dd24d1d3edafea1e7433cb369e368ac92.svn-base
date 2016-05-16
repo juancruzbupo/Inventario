@@ -1,0 +1,62 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Editar Producto</h1>
+    <hr/>
+
+    {!! Form::model($producto, ['method' => 'PATCH', 'action' => ['ProductoController@update', $producto->id], 'class' => 'form-horizontal']) !!}
+
+    <div class="form-group">
+                        {!! Form::label('marca_id', 'Marca Id: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('marca_id', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('modelo_id', 'Modelo Id: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('modelo_id', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('nro_serie', 'Nro Serie: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('nro_serie', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('id_patrimonial', 'Id Patrimonio: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('id_patrimonial', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('fecha_alta', 'Fecha Alta: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('fecha_alta', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('fecha_baja', 'Fecha Baja: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('fecha_baja', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div><div class="form-group">
+                        {!! Form::label('subcuenta_id', 'Subcuenta Id: ', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('subcuenta_id', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+    @if ($errors->any())
+        <ul class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+@endsection

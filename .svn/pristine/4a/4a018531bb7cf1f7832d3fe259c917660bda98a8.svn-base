@@ -1,0 +1,86 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Editar Producto</h1>
+    <hr/>
+
+    <?php echo Form::model($producto, ['method' => 'PATCH', 'action' => ['ProductoController@update', $producto->id], 'class' => 'form-horizontal']); ?>
+
+
+    <div class="form-group">
+                        <?php echo Form::label('marca_id', 'Marca Id: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('marca_id', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('modelo_id', 'Modelo Id: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('modelo_id', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('cod_p9', 'Cod P9: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('cod_p9', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('nro_serie', 'Nro Serie: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('nro_serie', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('id_patrimonio', 'Id Patrimonio: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('id_patrimonio', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('fecha_alta', 'Fecha Alta: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('fecha_alta', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('fecha_baja', 'Fecha Baja: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('fecha_baja', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div><div class="form-group">
+                        <?php echo Form::label('subcuenta_id', 'Subcuenta Id: ', ['class' => 'col-sm-3 control-label']); ?>
+
+                        <div class="col-sm-6">
+                            <?php echo Form::text('subcuenta_id', null, ['class' => 'form-control']); ?>
+
+                        </div>
+                    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <?php echo Form::submit('Update', ['class' => 'btn btn-primary form-control']); ?>
+
+        </div>
+    </div>
+    <?php echo Form::close(); ?>
+
+
+    <?php if($errors->any()): ?>
+        <ul class="alert alert-danger">
+            <?php foreach($errors->all() as $error): ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

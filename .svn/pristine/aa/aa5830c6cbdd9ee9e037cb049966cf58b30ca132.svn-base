@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Agente extends Model {
+
+	protected $table = 'agentes';
+	public $timestamps = true;
+	protected $fillable = array('apellido', 'nombre', 'dni');
+	protected $visible = array('apellido', 'nombre', 'dni');
+
+}

@@ -1,0 +1,81 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Carga <a href="<?php echo e(url('/carga')); ?>" class="btn btn-primary pull-right btn-sm">Volver</a></h1>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Fecha:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="<?php echo e(date('d/m/Y', strtotime($carga->fecha))); ?>" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Tipo Comp:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="<?php echo e($carga->tipo_comp); ?>"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Nro:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="<?php echo e($carga->nro); ?>"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Proveedor:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="<?php echo e($carga->proveedor->nombre); ?>"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Cod P9:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="<?php echo e($carga->cod_p9); ?>"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Importe</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value=" $ <?php echo e($carga->importe); ?>"  disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th class="info">Sub Cuenta</th>
+                <th class="info">Nombre</th>
+                <th class="info">Marca</th>
+                <th class="info">Modelo</th>
+                <th class="info">Nro Serie</th>
+                <th class="info">Nro Patrimonio</th>
+                <th class="info">Detalle</th>
+                <th class="info">Importe</th>
+                <th class="info">Accion</th>
+            </thead>
+            <tbody>
+                <?php foreach($carga->producto as $item): ?>
+                <tr  class="active">
+                <td><?php echo e($item->subcuenta->nombre); ?></td>
+                <td> <?php echo e($item->nombre); ?></td>
+                <td> <?php echo e($item->marca->nombre); ?></td>
+                <td> <?php echo e($item->modelo->nombre); ?></td>
+                <td> <?php echo e($item->nro_serie); ?></td>
+                <td> <?php echo e($item->id_patrimonial); ?></td>
+                <td> <?php echo e($item->detalle); ?></td>
+                <td> <?php echo e($item->importe); ?></td>
+                <td><a href="<?php echo e(url('/producto/'.$item->id.'/edit')); ?>"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

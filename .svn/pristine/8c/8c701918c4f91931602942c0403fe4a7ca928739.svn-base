@@ -1,0 +1,23 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Cargas <a href="{{ url('/carga/create') }}" class="btn btn-primary pull-right btn-sm">Crear Carga</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>SL.</th><th>Tipo Comp</th><th>Nro</th><th>Importe</th><th>Accion</th>
+            </tr>
+            {{-- */$x=0;/* --}}
+            @foreach($cargas as $item)
+                {{-- */$x++;/* --}}
+                <tr>
+                    <td>{{ $x }}</td>
+                    <td><a href="{{ url('/carga', $item->id) }}">{{ $item->tipo_comp }}</a></td><td>{{ $item->nro }}</td><td>{{ $item->importe }}</td>
+                    <td><a href="{{ url('/carga/'.$item->id.'/edit') }}"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a> / {!! Form::open(['method'=>'delete','action'=>['CargaController@destroy',$item->id], 'style' => 'display:inline']) !!}<button type="submit" class="btn btn-danger btn-xs">Borrar</button>{!! Form::close() !!}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+@endsection

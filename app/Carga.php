@@ -1,0 +1,30 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Carga extends Model {
+
+	protected $table = 'cargas';
+	public $timestamps = true;
+	protected $fillable = array('tipo_comp', 'nro', 'importe', 'cantidad', 'producto_id', 'proveedor_id', 'fecha', 'cod_p9');
+	protected $visible = array('id','tipo_comp', 'nro', 'importe', 'cantidad', 'producto_id', 'proveedor_id', 'fecha', 'cod_p9');
+
+	public function producto() {
+		return $this->hasMany('App\Producto');
+	}
+
+	public function proveedor() {
+		return $this->belongsTo('App\Proveedor', 'proveedor_id');
+	}
+
+	public function scopeDatatables($query) {
+		return $query->select('id', 'fecha', 'tipo_comp', 'nro', 'cod_p9', 'importe');
+	}
+
+	public function scopeValidaP9($query, $cod_p9){
+		return $query->select('*')->where('cod_p9', $cod_p9);
+	}
+
+}

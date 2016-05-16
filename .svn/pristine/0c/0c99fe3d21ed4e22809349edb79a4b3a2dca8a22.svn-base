@@ -1,0 +1,23 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Transferencias <a href="{{ url('/transferencia/create') }}" class="btn btn-primary pull-right btn-sm">Crear Transferencia</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>SL.</th><th>Fecha</th><th>Agente Id</th><th>Dependencia Id</th><th>Accion</th>
+            </tr>
+            {{-- */$x=0;/* --}}
+            @foreach($transferencias as $item)
+                {{-- */$x++;/* --}}
+                <tr>
+                    <td>{{ $x }}</td>
+                    <td><a href="{{ url('/transferencia', $item->id) }}">{{ $item->fecha }}</a></td><td>{{ $item->agente_id }}</td><td>{{ $item->dependencia_id }}</td>
+                    <td><a href="{{ url('/transferencia/'.$item->id.'/edit') }}"><button type="submit" class="btn btn-primary btn-xs">Editar</button></a> / {!! Form::open(['method'=>'delete','action'=>['TransferenciaController@destroy',$item->id], 'style' => 'display:inline']) !!}<button type="submit" class="btn btn-danger btn-xs">Borrar</button>{!! Form::close() !!}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+@endsection

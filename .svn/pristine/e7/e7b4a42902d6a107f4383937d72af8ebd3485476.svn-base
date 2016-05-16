@@ -1,0 +1,87 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Carga <a href="{{ url('/carga') }}" class="btn btn-primary pull-right btn-sm">Volver</a></h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>ID.</th> <th>Tipo Comp</th><th>Nro</th><th>Importe</th>
+            </tr>
+            <tr>
+                <td>{{ $carga->id }}</td> <td> {{ $carga->tipo_comp }} </td><td> {{ $carga->nro }} </td><td> {{ $carga->importe }} </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Fecha:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="{{ date('d/m/Y', strtotime($carga->fecha)) }}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Tipo Comp:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="{{ $carga->tipo_comp }}"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Nro:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="{{ $carga->nro }}"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Proveedor:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="{{ $carga->proveedor->nombre }}"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Cod P9:</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value="{{ $carga->cod_p9 }}"  disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Importe</label>
+            <div class="col-sm-6">
+                 <input type="text" class="form-control" value=" $ {{ $carga->importe }}"  disabled="disabled">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th>Sub Cuenta</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Nro Serie</th>
+                <th>Nro Patrimonio</th>
+                <th>Detalle</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach($carga->producto as $item)
+                <tr>
+                <td>{{ $item->subcuenta->nombre }}</td>
+                <td> {{ $item->nombre }}</td>
+                <td> {{ $item->marca->nombre }}</td>
+                <td> {{ $item->importe }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+
+@endsection

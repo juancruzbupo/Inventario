@@ -1,0 +1,17 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Agente</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>ID.</th> <th>Apellido</th><th>Nombre</th><th>Dni</th>
+            </tr>
+            <tr>
+                <td>{{ $agente->id }}</td> <td> {{ $agente->apellido }} </td><td> {{ $agente->nombre }} </td><td> {{ $agente->dni }} </td>
+            </tr>
+        </table>
+    </div>
+
+@endsection

@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Producto extends Model {
+
+	protected $table = 'productos';
+	public $timestamps = true;
+	protected $fillable = array('marca_id', 'modelo_id', 'cod_p9', 'nro_serie', 'id_patrimonial', 'fecha_alta', 'fecha_baja', 'subcuenta_id');
+	protected $visible = array('marca_id', 'modelo_id', 'cod_p9', 'nro_serie', 'id_patrimonial', 'fecha_alta', 'fecha_baja', 'subcuenta_id');
+
+	public function marca() {
+		return $this->belongsTo('App\Marca', 'marca_id');
+	}
+
+	public function modelo() {
+		return $this->belongsTo('App\Modelo', 'modelo_id');
+	}
+
+	public function subcuenta() {
+		return $this->belongsTo('App\SubCuenta', 'subcuenta_id');
+	}
+
+}

@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Agente;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class AgenteController extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		$agentes = Agente::latest()->get();
+		return view('agente.index', compact('agentes'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+		return view('agente.create');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store(Request $request) {
+		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
+		Agente::create($request->all());
+		return redirect('agente');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id) {
+		$agente = Agente::findOrFail($id);
+		return view('agente.show', compact('agente'));
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id) {
+		$agente = Agente::findOrFail($id);
+		return view('agente.edit', compact('agente'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id, Request $request) {
+		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
+		$agente = Agente::findOrFail($id);
+		$agente->update($request->all());
+		return redirect('agente');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id) {
+		Agente::destroy($id);
+		return redirect('agente');
+	}
+
+}

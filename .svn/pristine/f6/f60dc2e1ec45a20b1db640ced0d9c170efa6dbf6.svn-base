@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Cuenta;
+use App\Http\Controllers\Controller;
+use App\Producto;
+use App\Subcuenta;
+use Carbon\Carbon;
+use Datatables;
+use Illuminate\Http\Request;
+
+class GeneralController extends Controller {
+
+	public function stock(Request $request) {
+		$cuenta = Cuenta::lists('nombre', 'codigo')->all();
+
+		$cuenta = array('' => 'Seleccionar...') + $cuenta;
+
+		if ($request->ajax()) {
+
+			$subcuenta = $this->listaSubcuenta($request->codigo);
+
+			return response()->json($subcuenta);
+
+		}
+
+		return view('stock', compact('cuenta'));
+	}
+
+	public function datatables($id = 0) {
+		$data = Producto::select(array('marca_id', 'modelo_id', 'nro_serie', 'id_patrimonial', 'fecha_alta', 'fecha_baja', 'subcuenta_id'))->where('subcuenta_id', $id);
+
+		return Datatables::of($data)
+			->editColumn('marca_id', function ($data) {
+				return $data->marca->nombre;
+			})
+			->editColumn('modelo_id', function ($data) {
+				return $data->modelo->nombre;
+			})
+			->editColumn('subcuenta_id', function ($data) {
+				return $data->subcuenta->nombre;
+			})
+			->editColumn('fecha_alta', function ($data) {
+				if ($data->fecha_alta != null) {
+					return Carbon::createFromFormat('Y-m-d', $data->fecha_alta)->format('d/m/Y');
+				} else {
+					return $data->fecha_alta;
+				}
+			})
+			->editColumn('fecha_baja', function ($data) {
+				if ($data->fecha_baja != null) {
+					return Carbon::createFromFormat('Y-m-d', $data->fecha_baja)->format('d/m/Y');
+				} else {
+					return $data->fecha_baja;
+				}
+			})
+			->make(true);
+
+	}
+
+	private function listaSubcuenta($cuenta_codigo = 0) {
+
+		$query = Subcuenta::select('nombre', 'id')->where('cuenta_codigo', $cuenta_codigo)->get();
+
+		$lista = array(0 => 'Seleccionar...');
+
+		foreach ($query as $s) {
+			$lista = $lista + array($s->id => $s->nombre);
+		}
+
+		return $lista;
+	}
+
+}

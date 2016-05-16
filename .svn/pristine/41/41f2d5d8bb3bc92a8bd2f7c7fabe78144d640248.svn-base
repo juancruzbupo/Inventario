@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Producto;
+use App\Subcuenta;
+use Carbon\Carbon;
+use Datatables;
+use Illuminate\Http\Request;
+
+class GeneralController extends Controller {
+
+	public function stock() {
+		$subcuenta = Subcuenta::lists('nombre', 'id')->all();
+
+		$subcuenta = array('' => 'Seleccionar...') + $subcuenta;
+
+		return view('stock', compact('subcuenta'));
+	}
+
+	public function datatables() {
+		$data = Producto::select(array('marca_id', 'modelo_id', 'nro_serie', 'id_patrimonial', 'fecha_alta', 'fecha_baja', 'subcuenta_id'));
+
+		return Datatables::of($data)
+			->editColumn('marca_id', function ($data) {
+				return $data->marca->nombre;
+			})
+			->editColumn('modelo_id', function ($data) {
+				return $data->modelo->nombre;
+			})
+			->editColumn('subcuenta_id', function ($data) {
+				return $data->subcuenta->nombre;
+			})
+			->editColumn('fecha_alta', function ($data) {
+				return Carbon::createFromFormat('Y-m-d', $data->fecha_alta)->format('d/m/Y');
+
+			})
+			->make(true);
+
+	}
+
+	public function store(Request $request) {
+		//
+	}
+
+}

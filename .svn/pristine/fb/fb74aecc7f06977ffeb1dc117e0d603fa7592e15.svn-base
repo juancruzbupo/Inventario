@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Inventario App</title>
+	<?php echo Html::style('public/assets/css/bootstrap.min.css'); ?>
+
+
+	<?php echo Html::style('public/assets/DataTables-1.10.9/css/jquery.dataTables.min.css'); ?>
+
+
+	<?php echo Html::style('public/assets/css/selectize.default.css'); ?>
+
+	
+	<?php echo $__env->yieldContent('style'); ?>
+	
+	<style>
+		body {
+			padding-top: 70px;
+		}
+	</style>
+
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	    <div class="container">
+	        <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href="<?php echo e(url('/')); ?>">Inventario App</a>
+	        </div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-left">
+					 <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventario <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			          	<li><a href="<?php echo e(url('/carga/create')); ?>">Alta</a></li>
+			          	<li><a href="<?php echo e(url('/carga')); ?>">Baja</a></li>
+			          	<li><a href="<?php echo e(url('/stock')); ?>">Stock</a></li>
+			          </ul>
+			        </li>
+			        <li><a href="#">Transferencia</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<?php if(Auth::guest()): ?>
+						<li><a href="<?php echo e(url('/auth/login')); ?>">Login</a></li>
+					<?php else: ?>
+						<li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+				          <ul class="dropdown-menu">
+				          	<li><a href="<?php echo e(url('/agente')); ?>">Agente</a></li>
+				          	<li><a href="<?php echo e(url('/cuenta')); ?>">Cuenta</a></li>
+				          	<li><a href="<?php echo e(url('/dependencia')); ?>">Dependencia</a></li>
+				          	<li><a href="<?php echo e(url('/marca')); ?>">Marca</a></li>
+				          	<li><a href="<?php echo e(url('/modelo')); ?>">Modelo</a></li>
+				          	<li><a href="<?php echo e(url('/producto')); ?>">Producto</a></li>
+				          	<li><a href="<?php echo e(url('/proveedor')); ?>">Proveedor</a></li>
+							<li><a href="<?php echo e(url('/subcuenta')); ?>">SubCuenta</a></li>
+				            <li><a href="<?php echo e(url('/transferencia')); ?>">Transferencia</a></li>
+				          </ul>
+				        </li>
+						<li><a href="#"><?php echo e(Auth::user()->name); ?></a></li>
+						<li><a href="<?php echo e(url('/auth/logout')); ?>">Logout</a></li>
+					<?php endif; ?>
+				</ul>
+			</div>
+
+	    </div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="container">
+		<?php echo $__env->yieldContent('content'); ?>
+	</div>
+
+	<hr/>
+
+	<div class="container">
+	    &copy; <?php echo e(date('Y')); ?>. Vialidad Provincial<br/>
+	</div>
+
+	<!-- Scripts -->
+	<?php echo Html::script('public/assets/js/jquery.min.js'); ?>
+
+
+	<?php echo Html::script('public/assets/js/bootstrap.min.js'); ?>
+
+	
+	<?php echo Html::script('public/assets/js/selectize.min.js'); ?>
+
+
+	<?php echo Html::script('public/assets/DataTables-1.10.9/js/jquery.dataTables.min.js'); ?>
+
+
+	<?php echo $__env->yieldContent('script'); ?>
+
+</body>
+</html>

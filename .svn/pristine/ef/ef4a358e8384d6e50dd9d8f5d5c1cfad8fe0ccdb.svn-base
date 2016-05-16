@@ -1,0 +1,17 @@
+<?php $__env->startSection('content'); ?>
+
+    <h1>Producto</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>ID.</th> <th>Marca Id</th><th>Modelo Id</th><th>Cod P9</th>
+            </tr>
+            <tr>
+                <td><?php echo e($producto->id); ?></td> <td> <?php echo e($producto->marca_id); ?> </td><td> <?php echo e($producto->modelo_id); ?> </td><td> <?php echo e($producto->cod_p9); ?> </td>
+            </tr>
+        </table>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

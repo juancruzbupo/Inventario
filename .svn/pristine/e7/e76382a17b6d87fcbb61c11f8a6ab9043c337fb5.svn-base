@@ -1,0 +1,27 @@
+@extends('layout.admin')
+
+@section('content')
+    <div class="page-header">
+        <h1>{{Class}} / Create </h1>
+    </div>
+
+    {!! \App\Libs\ErrorDisplay::getInstance()->displayAll($errors) !!}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <form action="{{ action('Admin\{{ClassSingle}}Controller@store') }}" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                {{content_fields}}
+
+
+
+            <a class="btn btn-default" href="{{ action('Admin\{{ClassSingle}}Controller@index') }}">Back</a>
+            <button class="btn btn-primary" type="submit" >Create</a>
+            </form>
+        </div>
+    </div>
+
+
+@endsection
